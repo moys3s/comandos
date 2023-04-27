@@ -81,3 +81,21 @@ botaoCopiar.addEventListener("click", () => {
       console.error("Erro ao copiar o comando: ", err);
     });
 });
+
+const xlsx = require('xlsx');
+const fs = require('fs');
+
+// Load the xlsx file
+const workbook = xlsx.readFile('suntech.xlsx');
+
+// Get the first worksheet
+const sheet_name_list = workbook.SheetNames;
+const worksheet = workbook.Sheets[sheet_name_list[0]];
+
+// Convert the worksheet to JSON object
+const data = xlsx.utils.sheet_to_json(worksheet);
+
+// Write the JSON object to a file
+fs.writeFileSync('output.json', JSON.stringify(data));
+console.log(output.json)
+
